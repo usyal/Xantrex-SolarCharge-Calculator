@@ -29,17 +29,17 @@
 
                     <div class="input-group mb-3">
                         <span class="input-group-text fw-bold">Maximum Power (P<sub>max</sub>)</span>
-                        <input type="number" class="form-control" aria-label="Maximum Power" value="175">
+                        <input type="number" class="form-control" aria-label="Maximum Power" value="175" id="max-power">
                         <span class="input-group-text fw-bold">W</span>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text fw-bold">Open Circuit Voltage (V<sub>oc</sub>)</span>
-                        <input type="number" class="form-control" aria-label="Open Circuit voltage" value="20">
+                        <input type="number" class="form-control" aria-label="Open Circuit voltage" value="20" id="open-circuit-voltage">
                         <span class="input-group-text fw-bold">V</span>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text fw-bold">Short Circuit Current (I<sub>sc</sub>)</span>
-                        <input type="number" class="form-control" aria-label="Short Curcuit Current" value="10.5">
+                        <input type="number" class="form-control" aria-label="Short Curcuit Current" value="10.5" id="short-circuit-current">
                         <span class="input-group-text fw-bold">A</span>
                     </div>
                     <img class="img-fluid rounded mx-auto d-block" alt="single solar panel" src="designs/single-solar-panel.png" width="250" height="50">
@@ -53,11 +53,11 @@
 
                     <div class="input-group mb-3 w-50">
                         <span class="input-group-text fw-bold">Series</span>
-                        <input type="number" class="form-control" aria-label="Number of Panels in Series" value="1" min="1" max="6">
+                        <input type="number" class="form-control" aria-label="Number of Panels in Series" value="1" min="1" max="6" id="series">
                     </div>
                     <div class="input-group mb-3 w-50">
                         <span class="input-group-text fw-bold">Parallel</span>
-                        <input type="number" class="form-control" aria-label="Number of Solar Panels in Parallel" value="1" min="1" max="4">
+                        <input type="number" class="form-control" aria-label="Number of Solar Panels in Parallel" value="1" min="1" max="4" id="parallel">
                     </div>
                     <div class="input-group mb-3 w-50">
                         <label class="input-group-text fw-bold" for="battery-bank-voltage">Bank Volts</label>
@@ -66,22 +66,18 @@
                             <option value="24">24V</option>
                         </select>
                     </div>
+                    <!--Output of calculations goes here-->
                     <div class="container text-center">
-                        <div class="row align-items-center mb-2">
-                            <div class="col fw-bold border border-2 border-info rounded-start">Total Array Power</div>
-                            <div class="col fw-bold border border-2 border-info rounded-start">Open Circuit Voltage</div>
-                            <div class="col fw-bold border border-2 border-info rounded-start">Max Current Charge</div>
-                        </div>
-
-                        <!--Output of calculations goes here-->
-                        <div class="row align-items-center">
-                            <div class="col total-power"><p></p></div>
-                            <div class="col open-circuit-voltage"><p></p></div>
-                            <div class="col max-current-charge"><p></p></div>
+                        <div class="row d-flex flex-column flex-md-row text-center">
+                            <div class="col border border-2 border-info d-flex flex-column mb-1 mt-3 rounded-bottom"><strong>Total Array Power</strong><p id="total-power"></p></div>
+                            <div class="col border border-2 border-info d-flex flex-column mb-1 mt-3 rounded-bottom"><strong>Open Circuit Voltage</strong><p id="final-open-circuit-voltage"></p></div>
+                            <div class="col border border-2 border-info d-flex flex-column mb-1 mt-3 rounded-bottom"><strong>Max Current Charge</strong><p id="max-current-charge"></p></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
    </div>
+   <script src="script.js"></script>
 </body>
+</html>
