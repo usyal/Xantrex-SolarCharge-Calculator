@@ -17,7 +17,7 @@
             <div class="alert alert-success" role="alert" aria-live="polite" th:if="${message != null}" th:text="${message}"></div>
             <div class="alert alert-success" role="alert" aria-live="polite" th:if="${param.logout}">You have been logged out.</div>
             <div class="alert alert-info" role="alert" aria-live="polite" th:if="${param.reset}">If an account exists for that email, reset instructions were sent.</div>
-            <p class="text-muted small mb-3">Sign in to access the Solar Charge Controller Calculator.</p>
+            <p class="text-muted small mb-3">Login in to access the Solar Charge Controller Calculator.</p>
 
             <form method="post" th:action="@{/login}">
               <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
@@ -44,7 +44,7 @@
                 <a class="small text-decoration-none" th:href="@{/password}">Forgot password?</a>
               </div>
 
-              <button class="btn btn-primary w-100" type="submit">Sign in</button>
+              <button class="btn btn-primary w-100" type="submit">Login in</button>
             </form>
 
             <div class="mt-3 small d-flex justify-content-between">
