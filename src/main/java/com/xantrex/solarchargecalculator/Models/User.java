@@ -1,4 +1,4 @@
-package com.xantrex.solarchargecalculator.Models;
+package com.xantrex.solarchargecalculator.models;
 
 import jakarta.persistence.*;
 
@@ -10,11 +10,12 @@ public class User {
     private int id;
     @Column(nullable = false)
     private String name; 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String password;
+
     public User() {
     }
-    public User(String name, String email, String password) {
+    public User(String name, String password) {
         this.name = name;
         this.password = password;
     }
