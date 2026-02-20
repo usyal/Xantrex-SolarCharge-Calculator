@@ -3,6 +3,9 @@
 // Open Circuit Voltage (VocArray) = Voc * Ns * 1.2 --> Assuming temperature correction factor of 1.2
 // Max Charge Current (Icharge) = Ptotal / exactBatteryBankVoltage
 document.addEventListener("DOMContentLoaded", () => {
+    const modal = new bootstrap.Modal(document.getElementById("modal"));
+    modal.show();
+
     const inputs = document.querySelectorAll("input");
     const selected = document.querySelectorAll("select");
 
@@ -23,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let Isc = parseFloat(document.getElementById("short-circuit-current").value);
         let Ns = parseInt(document.getElementById("series").value);
         let Np = parseInt(document.getElementById("parallel").value);
+        let tempFactor = parseFloat(document.getElementById("temp-factor").value);
         let batteryBankVoltage = parseInt(document.getElementById("battery-bank-voltage").value);
         let exactBatteryBankVoltage = 0;
 
@@ -54,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const Ptotal = Pmax * Ns * Np;
-        const VocArray = Voc * Ns * 1.2;
+        const VocArray = Voc * Ns * tempFactor;
         const Icharge = Ptotal / exactBatteryBankVoltage;
 
         document.getElementById("total-power").innerHTML = `<p>${Ptotal.toFixed(2)} W</p>`;
