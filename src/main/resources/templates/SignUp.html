@@ -12,7 +12,7 @@
   <!--Navigation Bar-->
   <nav class="navbar navbar-expand-lg sticky-top" style="background-color: #25257d;">
     <div class="container-fluid">
-        <a class="navbar-brand ms-5" href="https://xantrex.com/"><img src="../static/designs/xantrex-logo.png" alt="Xantrex" width="150" height="45"></a>
+        <a class="navbar-brand ms-5" href="https://xantrex.com/"><img src="/designs/xantrex-logo.png" alt="Xantrex" width="150" height="45"></a>
         <h1 class="fw-bold fs-4 fs-sm-3 fs-md-2 fs-lg-1 m-0">Create Your Account!</h1>
     </div>
   </nav>
@@ -20,23 +20,23 @@
   <!-- Input User Info -->
   <main class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
           <form class="row g-3" action="/user/signup" method="post">
-            <p style="color:gray;">Mandatory infomations are marked *</p>
+              <p style="color:gray; margin-top: 1.5em;">Mandatory infomations are marked *</p>
               <div class="col-md-6">
-                <label for="NameSU" class="form-label">Name *</label>
+                <label for="NameSU" class="form-label fs-3">Name *</label>
                 <input type="text" class="form-control" id="NameSU" name="nameSU" required th:value="${inputs != null ? inputs.nameS : ''}">
               </div>
               <div class="col-md-6">
-                <label for="PwdSU" class="form-label">Password *</label>
+                <label for="PwdSU" class="form-label fs-3">Password *</label>
                 <input type="text" class="form-control" id="PwdSU" name="PwdSU" required th:value="${inputs != null ? inputs.PwdS : ''}">
               </div>
               <div th:if="${error != null and !#strings.isEmpty(error)}" class="alert alert-danger mt-3">
                 <span th:text="${error}"></span>
               </div>
               <div class="col-md-8">
-                <a th:href="@{/}" class="btn btn-danger">Cancel</a> <!-- Back to index.html -->
-                <input type="submit" class="btn btn-primary" value="Register" id="registerSU"></input>
+                <a th:href="@{/}" class="btn btn-danger fs-5" style="background-color:#ec3245; color:white;">Cancel</a> <!-- Back to index.html -->
+                <input type="submit" class="btn btn-primary fs-5" value="Register" id="registerSU" style="background-color:#25257d; color:white;"></input>
               </div>
             </form>
 
