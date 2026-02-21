@@ -46,6 +46,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!Np){
             Np = 0;
         }
+        if (!tempFactor){
+            tempFactor = 0;
+        }
 
         if (batteryBankVoltage === 12){
             exactBatteryBankVoltage = 14.7;
