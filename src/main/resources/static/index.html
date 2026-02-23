@@ -32,7 +32,7 @@
         <div class="container-fluid">
             <a class="navbar-brand ms-5" href="https://xantrex.com/"><img src="designs/xantrex-logo.png" alt="Xantrex" width="150" height="45"></a>
             <h1 class="fw-bold fs-4 fs-sm-3 fs-md-2 fs-lg-1 m-0">Solar Charge Controller Calculator</h1>
-            <form id="auth-area" class="d-flex gap-2">
+            <form class="d-flex gap-2">
                 <a href="/login" class="btn btn-outline-light text-decoration-none">Login</a>
                 <a href="/signup" class="btn btn-outline-light text-decoration-none">Signup</a>
             </form>
@@ -80,7 +80,7 @@
                     </div>
                     <div class="input-group mb-3 w-50">
                         <span class="input-group-text fw-bold">Correction Factor</span>
-                        <input type="number" class="form-control" aria-label="Temperature Correction factor" value="1.2" id="temp-factor">
+                        <input type="number" class="form-control" aria-label="Temperature Correction factor" value="1.2" step="0.1" min="0" id="temp-factor">
                     </div>
                     <div class="input-group mb-3 w-50">
                         <label class="input-group-text fw-bold" for="battery-bank-voltage">Bank Volts</label>
@@ -144,6 +144,5 @@
         </div>
    </div>
    <script src="script.js"></script>
-   <script src="navbar-auth.js"></script>
 </body>
 </html>
