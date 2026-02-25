@@ -8,15 +8,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.xantrex.solarchargecalculator.models.User;
-import com.xantrex.solarchargecalculator.models.UserRepository;
-
 import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
+
+import com.xantrex.solarchargecalculator.models.User;
+import com.xantrex.solarchargecalculator.models.UserRepository;
 
 
 @Controller
@@ -65,7 +65,7 @@ public class SignUpController {
         // Save info to database
         userRepo.save(new User(newName, newPwd));
         response.setStatus(201);
-        return "auto_page"; // goto authorized user page
+        return "login"; // go back to login page
     }
 
 }
