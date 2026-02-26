@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class LoginController {
 
@@ -19,18 +21,21 @@ public class LoginController {
     public String doLogin(
             @RequestParam("username") String username,
             @RequestParam("password") String password,
-            Model model
+            Model model,
+            HttpSession session
     ) {
         // TODO: Replace with real authentication (DB + hashed passwords)
         boolean ok = "parsa@sfu.ca".equalsIgnoreCase(username) && "1234".equals(password);
 
         if (!ok) {
-            model.addAttribute("error", "Invalid username or password");
-            return "auth/login";
+            model.addAttribute("error", "Invalid email or password");
+            return "login";
         }
+        // UI-only: store username in session for navbar display
+        session.setAttribute("username", username);
 
         // TODO: Set session/auth cookie (Spring Security later)
-        return "redirect:/";
+        return "redirect:/home";
     }
 
     // Iteration 1 (UI-only): Password reset flow pages
@@ -43,13 +48,13 @@ public class LoginController {
     // Later iterations can send an email + token.
     @PostMapping("/password")
     public String passwordResetSubmit(
-            @RequestParam String username,
+            @RequestParam String email,
             RedirectAttributes redirectAttributes
     ) {
         // For now we just pretend we sent an email.
         redirectAttributes.addFlashAttribute(
                 "message",
-                "If an account exists for " + username + ", we sent password reset instructions."
+                "If an account exists for " + email + ", we sent password reset instructions."
         );
         return "redirect:/password-confirm";
     }
