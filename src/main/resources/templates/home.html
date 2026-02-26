@@ -58,31 +58,41 @@
             <!--Single Panel Specification Form-->
             <div class="col-md-6 mb-3">
                 <div class="card p-3 shadow-sm mt-3" style="background-color: aliceblue;">
-                    <h3 class="card-title fw-bold">1. Single Panel Specifications</h3>
+                    <h3 class="card-title fw-bold" style="text-align: center;">1. Single Panel Specifications</h3>
 
                     <div class="input-group mb-3">
                         <span class="input-group-text fw-bold">Maximum Power (P<sub>max</sub>)</span>
-                        <input type="number" class="form-control" aria-label="Maximum Power" value="175" id="max-power">
+                        <input type="number" class="form-control" aria-label="Maximum Power" value="115" min="0" step="1" id="max-power">
                         <span class="input-group-text fw-bold">W</span>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text fw-bold">Open Circuit Voltage (V<sub>oc</sub>)</span>
-                        <input type="number" class="form-control" aria-label="Open Circuit voltage" value="20" id="open-circuit-voltage">
+                        <input type="number" class="form-control" aria-label="Open Circuit voltage" value="27.4" min="0" step="0.2" id="open-circuit-voltage">
+                        <span class="input-group-text fw-bold">V</span>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text fw-bold">Maximum Power Voltage (V<sub>mp</sub>)</span>
+                        <input type="number" class="form-control" aria-label="Max Power Voltage" value="22.1" min="0" step="0.1" id="max-power-voltage">
                         <span class="input-group-text fw-bold">V</span>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text fw-bold">Short Circuit Current (I<sub>sc</sub>)</span>
-                        <input type="number" class="form-control" aria-label="Short Curcuit Current" value="10.5" id="short-circuit-current">
+                        <input type="number" class="form-control" aria-label="Short Curcuit Current" value="5.6" min="0" step="0.1" id="short-circuit-current">
                         <span class="input-group-text fw-bold">A</span>
                     </div>
-                    <img class="img-fluid rounded mx-auto d-block" alt="single solar panel" src="/designs/single-solar-panel.png" width="250" height="50">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text fw-bold">Maximum Power Current (I<sub>mp</sub>)</span>
+                        <input type="number" class="form-control" aria-label="Max Power Current" value="5.2" min="0" step="0.1" id="max-power-current">
+                        <span class="input-group-text fw-bold">A</span>
+                    </div>
+                    <img class="img-fluid rounded mx-auto d-block" alt="single solar panel" src="designs/single-solar-panel.png" width="250" height="50">
                 </div>
             </div>
             
             <!--Solar Array Specifications-->
             <div class="col-md-6 mb-3">
-                <div class="card p-3 shadow-sm mt-3" style="background-color: aliceblue;">
-                    <h3 class="card-title fw-bold">2. Solar Array Specifications</h3>
+                <div class="card p-3 shadow-sm mt-3" style="background-color: aliceblue; height: 97%;">
+                    <h3 class="card-title fw-bold" style="text-align: center;">2. Solar Array Specifications</h3>
 
                     <div class="input-group mb-3 w-50">
                         <span class="input-group-text fw-bold">Series</span>
@@ -90,30 +100,51 @@
                     </div>
                     <div class="input-group mb-3 w-50">
                         <span class="input-group-text fw-bold">Parallel</span>
-                        <input type="number" class="form-control" aria-label="Number of Solar Panels in Parallel" value="1" min="1" max="4" id="parallel">
+                        <input type="number" class="form-control" aria-label="Number of Solar Panels in Parallel" value="2" min="1" max="4" id="parallel">
                     </div>
                     <div class="input-group mb-3 w-50">
-                        <span class="input-group-text fw-bold">Correction Factor</span>
-                        <input type="number" class="form-control" aria-label="Temperature Correction factor" value="1.2" id="temp-factor">
-                    </div>
-                    <div class="input-group mb-3 w-50">
-                        <label class="input-group-text fw-bold" for="battery-bank-voltage">Bank Volts</label>
-                        <select class="form-select" id="battery-bank-voltage">
+                        <label class="input-group-text fw-bold" for="system-voltage">System Voltage</label>
+                        <select class="form-select" id="system-voltage">
                             <option value="12" selected>12V</option>
                             <option value="24">24V</option>
                         </select>
                     </div>
+                    <div class="input-group mb-3 w-50">
+                        <label class="input-group-text fw-bold" for="battery-type">Battery Type</label>
+                        <select class="form-select" id="battery-type">
+                            <option value="LiFePO4">Lithium Iron Phosphate (LiFePO4)</option>
+                            <option value="AGM">AGM</option>
+                            <option value="FLA">Flooded Lead Acid (FLA)</option>
+                            <option value="Gel" selected>Gel</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3 w-75">
+                        <span class="input-group-text fw-bold">Temp. Coefficient (Optional)</span>
+                        <input type="number" class="form-control" aria-label="Temperature Correction factor" value="1" step="0.1" min="0" id="temp-factor">
+                    </div>
+
                     <!--Output of calculations goes here-->
                     <div class="container text-center">
                         <div class="row d-flex flex-column flex-md-row text-center">
-                            <div class="col border border-2 border-info d-flex flex-column mt-2 rounded-bottom"><strong>Total Array Power</strong><hr><p id="total-power"></p></div>
-                            <div class="col border border-2 border-info d-flex flex-column mt-2 rounded-bottom"><strong>Open Circuit Voltage</strong><hr><p id="final-open-circuit-voltage"></p></div>
-                            <div class="col border border-2 border-info d-flex flex-column mt-2 rounded-bottom"><strong>Max Current Charge</strong><hr><p id="max-current-charge"></p></div>
+                            <div class="col border border-2 border-info d-flex flex-column mt-2 rounded-bottom"><em>Total Array Power</em><hr><p id="total-power"></p></div>
+                            <div class="col border border-2 border-info d-flex flex-column mt-2 rounded-bottom"><em>Open Circuit Voltage</em><hr><p id="final-open-circuit-voltage"></p></div>
+                            <div class="col border border-2 border-info d-flex flex-column mt-2 rounded-bottom"><em>Max Current Charge</em><hr><p id="max-current-charge"></p></div>
+                            <div class="col border border-2 border-info d-flex flex-column mt-2 rounded-bottom"><em>Max Power Voltage</em><hr><p id="final-max-power-voltage"></p></div>
+                            <div class="col border border-2 border-info d-flex flex-column mt-2 rounded-bottom"><em>Max Power Current</em><hr><p id="final-max-power-current"></p></div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!--Recommending a charger if applicable-->
+        <div class="col-md-12 mb-4">
+            <div class="card p-3 shadow-sm mt-3" style="background-color: aliceblue;">
+                <h3 class="card-title fw-bold mb-4" style="text-align: center;">3. Recommended Charger Based on the Results</h3>
+                <p class="lead" id="recommended-charger" style="text-align: center;"></p>
+            </div>
+        </div>
+
         <div class="col-md-12 mb-3">
             <div class="card p-3 shadow-sm mt-3" style="background-color: aliceblue;">
                 <h3 class="card-title fw-bold mb-4">How The Application Works</h3>
@@ -123,26 +154,30 @@
                         <!--Info about inputs provided-->
                         <div class="col-12 col-md-4">
                             <div class="card p-3 shadow-sm mt-3">
-                                <p class="lead text-center" style="font-size: 1.5em;"><strong>Required Inputs</strong></p>
+                                <p class="lead text-center" id="requirements" style="font-size: 1.5em;"><strong>Required Inputs</strong></p>
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">Maximum Power of a single panel (<strong>P<sub>max</sub></strong>) in Watts</li>
                                     <li class="list-group-item">Open Circuit Voltage of a single panel (<strong>V<sub>oc</sub></strong>) in Volts</li>
+                                    <li class="list-group-item">Maximum Power Voltage of a single panel (<strong>V<sub>mp</sub></strong>) in Volts</li>
                                     <li class="list-group-item">Short Circuit Charge of a single panel (<strong>I<sub>sc</sub></strong>) in Amps</li>
+                                    <li class="list-group-item">Maximum Power Current of a single panel (<strong>I<sub>mp</sub></strong>) in Amps</li>
                                     <li class="list-group-item">Number of Panels in Series <strong>N<sub>s</sub></strong> and Parallel <Strong>N<sub>P</sub></strong></li>
-                                    <li class="list-group-item">Battery Bank Voltage <strong>V<sub>nom</sub></strong> of Solar Array</li>
+                                    <li class="list-group-item">System Voltage <strong>V<sub>nom</sub></strong> of Solar Array & <strong>Battery Type</strong> used in Solar Array</li>
                                 </ul>
                             </div>
                         </div>
                         <!--Info about formulas-->
                         <div class="col-12 col-md-5">
-                            <div class="card p-3 shadow-sm mt-3">
-                                <p class="lead text-center" style="font-size: 1.5em;"><strong>Computational Formulas</strong></p>
+                            <div class="card p-3 shadow-sm mt-3" id="formula">
+                                <p class="lead text-center" style="font-size: 1.5em;"><strong>Solar Array Computational Formulas</strong></p>
                                 <p class="lead ms-2 mb-4" style="font-size: 1.1rem;">Total Array Power = P<sub>max</sub> * N<sub>s</sub> * N<sub>p</sub></p>
-                                <p class="lead ms-2 mb-4" style="font-size: 1.1rem;">Open Circuit Voltage = V<sub>oc</sub> * N<sub>s</sub> * temp. correction factor </p>
+                                <p class="lead ms-2 mb-4" style="font-size: 1.1rem;">Open Circuit Voltage = V<sub>oc</sub> * N<sub>s</sub> * temp. coefficient </p>
                                 <p class="lead ms-2 mb-4" style="font-size: 1.1rem;">Max Current Charge = Total Array Power / V<sub>nom</sub></p>
+                                <p class="lead ms-2 mb-4" style="font-size: 1.1rem;">Max Power Voltage = V<sub>mp</sub> * N<sub>s</sub></p>
+                                <p class="lead ms-2 mb-4" style="font-size: 1.1rem;">Max Power Current = I<sub>mp</sub> * N<sub>p</sub></p>
                                 <hr>
-                                <p class="lead ms-2 mb-2" style="font-size: 0.8rem; font-style: italic;">*Default temp. correction factor is set to 1.2</p>
-                                <p class="lead ms-2 mb-5" style="font-size: 0.8rem; font-style: italic;">*Consult the temp. correction factor chart to the right</p>
+                                <p class="lead ms-2 mb-2" style="font-size: 0.8rem; font-style: italic;">*Default temp. coefficient is set to 1</p>
+                                <p class="lead ms-2 mb-5" style="font-size: 0.8rem; font-style: italic;">*Consult the temp. coefficient chart to the right</p>
                             </div>
                         </div>
                         <!--Temperature Correction chart-->
