@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class LoginController {
 
@@ -17,20 +19,23 @@ public class LoginController {
 
     @PostMapping("/login")
     public String doLogin(
-            @RequestParam("email") String email,
+            @RequestParam("username") String username,
             @RequestParam("password") String password,
-            Model model
+            Model model,
+            HttpSession session
     ) {
         // TODO: Replace with real authentication (DB + hashed passwords)
-        boolean ok = "parsa@sfu.ca".equalsIgnoreCase(email) && "1234".equals(password);
+        boolean ok = "parsa@sfu.ca".equalsIgnoreCase(username) && "1234".equals(password);
 
         if (!ok) {
             model.addAttribute("error", "Invalid email or password");
-            return "auth/login";
+            return "login";
         }
+        // UI-only: store username in session for navbar display
+        session.setAttribute("username", username);
 
         // TODO: Set session/auth cookie (Spring Security later)
-        return "redirect:/";
+        return "redirect:/home";
     }
 
     // Iteration 1 (UI-only): Password reset flow pages
