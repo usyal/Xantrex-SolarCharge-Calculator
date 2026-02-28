@@ -63,6 +63,6 @@ public class SignUpController {
         // Save info to database
         userRepo.save(new User(newName, newPwd));
         response.setStatus(201);
-        return "redirect:/"; // go back to login page
+        return "login"; // go back to login page
     }
 }
