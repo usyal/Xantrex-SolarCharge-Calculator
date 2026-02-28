@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="styles.css">
+  <title>SignUp</title>
+</head>
+<body class="bg-light">
+  <!--Navigation Bar-->
+  <nav class="navbar navbar-expand-lg sticky-top" style="background-color: #25257d;">
+    <div class="container-fluid">
+        <a class="navbar-brand ms-5" href="https://xantrex.com/" target="_blank"><img src="/designs/xantrex-logo.png" alt="Xantrex" width="150" height="45"></a>
+        <h1 class="fw-bold fs-4 fs-sm-3 fs-md-2 fs-lg-1 m-0">Create Your Account!</h1>
+    </div>
+  </nav>
+
+  <!-- Input User Info -->
+  <main class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+          <form class="row g-3" action="/user/signup" method="post">
+              <p style="color:gray; margin-top: 1.5em;">Mandatory infomations are marked *</p>
+              <div class="col-md-12">
+                <label for="NameSU" class="form-label fs-3 ms-3">Username *</label>
+                <input type="text" class="form-control" id="NameSU" name="nameSU" required th:value="${inputs != null ? inputs.nameSU : ''}">
+              </div>
+              <div class="col-md-12">
+                <label for="PwdSU" class="form-label fs-3 ms-3">Password *</label>
+                <input type="password" class="form-control" id="PwdSU" name="PwdSU" required th:value="${inputs != null ? inputs.PwdSU : ''}">
+              </div>
+              <div th:if="${error != null and !#strings.isEmpty(error)}" class="alert alert-danger mt-3">
+                <span th:text="${error}"></span>
+              </div>
+              <div class="col-md-8">
+                <a th:href="@{/}" class="btn btn-danger fs-5" style="background-color:#ec3245; color:white;">Cancel</a> <!-- Back to index.html -->
+                <input type="submit" class="btn btn-primary fs-5" value="Register" id="registerSU" style="background-color:#25257d; color:white;"></input>
+              </div>
+            </form>
+      </div>
+    </div>
+</main>
