@@ -1,4 +1,4 @@
-package com.xantrex.solarchargecalculator.controller;
+package com.xantrex.solarchargecalculator.controllers;
 
 import java.util.Map;
 
@@ -41,7 +41,7 @@ public class SignUpController {
     @GetMapping("/signup")
     public String redirectSignUp() {
         System.out.println("New User Sign Up");
-        return "SignUp";
+        return "signup";
     }
     
     @PostMapping("/user/signup")
@@ -57,7 +57,7 @@ public class SignUpController {
         if(msg != null){
             model.addAttribute("error",msg);
             response.setStatus(400);
-            return "SignUp";
+            return "signup";
         }
 
         // Save info to database
