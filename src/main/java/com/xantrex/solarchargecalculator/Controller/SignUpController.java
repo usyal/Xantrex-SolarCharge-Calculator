@@ -1,27 +1,22 @@
-package com.xantrex.solarchargecalculator.Controller;
+package com.xantrex.solarchargecalculator.controller;
 
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import jakarta.servlet.http.HttpServletResponse;
-
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.xantrex.solarchargecalculator.models.User;
 import com.xantrex.solarchargecalculator.models.UserRepository;
 
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class SignUpController {
-    
     @Autowired
     private UserRepository userRepo;
 
@@ -31,6 +26,9 @@ public class SignUpController {
         }
         if(pwd == null || pwd.isBlank()){
             return "Password cannot be empty.";
+        }
+        if(userRepo.findByName(name).isPresent()){
+            return "Username already exists.";
         }
         return null;
     }
@@ -65,7 +63,6 @@ public class SignUpController {
         // Save info to database
         userRepo.save(new User(newName, newPwd));
         response.setStatus(201);
-        return "login"; // go back to login page
+        return "redirect:/"; // go back to login page
     }
-
 }
