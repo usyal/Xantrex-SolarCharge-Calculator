@@ -17,6 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class SignUpController {
+    
     @Autowired
     private UserRepository userRepo;
 
