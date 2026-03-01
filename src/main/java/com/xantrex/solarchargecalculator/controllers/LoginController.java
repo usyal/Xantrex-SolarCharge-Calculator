@@ -1,89 +1,49 @@
 package com.xantrex.solarchargecalculator.controllers;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.xantrex.solarchargecalculator.models.User;
+import com.xantrex.solarchargecalculator.models.UserRepository;
 
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
 
+    private final UserRepository userRepository;
+
+    public LoginController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @GetMapping("/login")
-    public String login() {
-        return "login";
+    public String loginPage() {
+        return "login"; // templates/login.html
     }
 
     @PostMapping("/login")
     public String doLogin(
             @RequestParam("username") String username,
             @RequestParam("password") String password,
-            Model model,
-            HttpSession session
+            HttpSession session,
+            Model model
     ) {
-        // TODO: Replace with real authentication (DB + hashed passwords)
-        boolean ok = "parsa@sfu.ca".equalsIgnoreCase(username) && "1234".equals(password);
+        Optional<User> userOpt = userRepository.findByName(username);
 
-        if (!ok) {
-            model.addAttribute("error", "Invalid email or password");
-            return "login";
+        if (userOpt.isPresent() && userOpt.get().getPassword() != null && userOpt.get().getPassword().equals(password)) {
+            User user = userOpt.get();
+            session.setAttribute("userId", user.getId());
+            session.setAttribute("username", user.getName());
+            return "redirect:/home";
         }
-        // UI-only: store username in session for navbar display
-        session.setAttribute("username", username);
 
-        // TODO: Set session/auth cookie (Spring Security later)
-        return "redirect:/home";
-    }
-
-    // Iteration 1 (UI-only): Password reset flow pages
-    @GetMapping("/password")
-    public String passwordReset() {
-        return "auth/password";
-    }
-
-    // Iteration 1 (UI-only): accept email and show confirmation page.
-    // Later iterations can send an email + token.
-    @PostMapping("/password")
-    public String passwordResetSubmit(
-            @RequestParam String email,
-            RedirectAttributes redirectAttributes
-    ) {
-        // For now we just pretend we sent an email.
-        redirectAttributes.addFlashAttribute(
-                "message",
-                "If an account exists for " + email + ", we sent password reset instructions."
-        );
-        return "redirect:/password-confirm";
-    }
-
-    @GetMapping("/password-confirm")
-    public String passwordResetConfirm(Model model) {
-        // FlashAttributes (like "message") will be available in the model after redirect.
-        return "auth/password-confirm";
-    }
-
-    // Backwards-compatible routes (optional): if your UI links still use these,
-    // keep them and redirect to the new paths.
-    @GetMapping("/reset-password")
-    public String resetPasswordRedirect() {
-        return "redirect:/password";
-    }
-
-    @GetMapping("/reset-password/confirm")
-    public String resetPasswordConfirmRedirect() {
-        return "redirect:/password-confirm";
-    }
-
-    @GetMapping("/forgot-password")
-    public String forgotPasswordRedirect() {
-        return "redirect:/password";
-    }
-
-    @GetMapping("/forgot-password/confirm")
-    public String forgotPasswordConfirmRedirect() {
-        return "redirect:/password-confirm";
+        model.addAttribute("error", "Invalid username or password");
+        return "login";
     }
 }
