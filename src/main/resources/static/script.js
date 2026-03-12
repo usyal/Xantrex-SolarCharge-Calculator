@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
             url1.textContent = "Xantrex MPPT Charge Controller 30A";
             url1.target = "_blank";
             url1.style.textDecoration = "none";
-            document.getElementById("recommended-charger").innerHTML = "<p>A suitable charger is available at Xantrex! Follow the url below:</p>";
+            document.getElementById("recommended-charger").innerHTML = "<p>A suitable charger is available at Xantrex! Follow the url below or scan the QR Code:</p>";
             document.getElementById("recommended-charger").appendChild(url1);
             return;
         }
