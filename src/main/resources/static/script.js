@@ -139,10 +139,6 @@ document.addEventListener("DOMContentLoaded", () => {
             url1.textContent = "Xantrex MPPT Charge Controller 30A";
             url1.target = "_blank";
             url1.style.textDecoration = "none";
-<<<<<<< HEAD
-            document.getElementById("recommended-charger").innerHTML = "<p>A suitable charger is available at Xantrex! Follow the url below or scan the QR Code:</p>";
-            document.getElementById("recommended-charger").appendChild(url1);
-=======
             recommendedCharger.innerHTML = "A suitable charger is available at Xantrex! Follow the url below:<br>";
             recommendedCharger.appendChild(url1);
 
@@ -161,7 +157,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     console.error("Unable to load QR code.", error);
                 }
             }
->>>>>>> cc20bbb290e39a0e47ce78a789efa61e8dfdecb7
             return;
         }
         else{
