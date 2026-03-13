@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initial function call to compute output for default values
     compute();
 
-    function compute() {
+    async function compute() {
         // All input fields required to compute outputs
         let Pmax = parseFloat(document.getElementById("max-power").value);
         let Voc = parseFloat(document.getElementById("open-circuit-voltage").value);
@@ -133,17 +133,39 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
         if (suggestion30A){
+            const recommendedCharger = document.getElementById("recommended-charger");
             const url1 = document.createElement("a");
             url1.href = "https://xantrex.com/products/solar-panels/xantrex-mppt-charge-controller-30a/";
             url1.textContent = "Xantrex MPPT Charge Controller 30A";
             url1.target = "_blank";
             url1.style.textDecoration = "none";
+<<<<<<< HEAD
             document.getElementById("recommended-charger").innerHTML = "<p>A suitable charger is available at Xantrex! Follow the url below or scan the QR Code:</p>";
             document.getElementById("recommended-charger").appendChild(url1);
+=======
+            recommendedCharger.innerHTML = "A suitable charger is available at Xantrex! Follow the url below:<br>";
+            recommendedCharger.appendChild(url1);
+
+            if (typeof qrCodeFeature !== "undefined") {
+                try {
+                    const qrImage = await qrCodeFeature.createQrImage(url1.href, {
+                        size: 180,
+                        alt: "QR code for Xantrex MPPT Charge Controller 30A",
+                        title: "Scan to open the product page"
+                    });
+                    qrImage.style.margin = "16px auto 0";
+                    recommendedCharger.appendChild(document.createElement("br"));
+                    recommendedCharger.appendChild(qrImage);
+                }
+                catch (error) {
+                    console.error("Unable to load QR code.", error);
+                }
+            }
+>>>>>>> cc20bbb290e39a0e47ce78a789efa61e8dfdecb7
             return;
         }
         else{
-            document.getElementById("recommended-charger").innerHTML = "<p style='color:red;'>&#x2757; No suitable charger is available yet</p>";
+            document.getElementById("recommended-charger").innerHTML = "<span style='color:red;'>&#x2757; No suitable charger is available yet</span>";
             return;
         }
     }
