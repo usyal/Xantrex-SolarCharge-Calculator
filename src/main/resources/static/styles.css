@@ -24,3 +24,52 @@ h3{
 #temp-chart{
     height: 97%;
 }
+
+.footer-xantrex{
+    background:#0f4a86;
+    color:white;
+}
+
+.footer-title{
+    font-size:24px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+.footer-subtitle{
+    font-size:18px;
+    font-weight:600;
+    margin-top:20px;
+}
+
+.footer-links{
+    list-style:none;
+    padding:0;
+}
+
+.footer-links li{
+    margin-bottom:10px;
+}
+
+.footer-links a{
+    color:white;
+    text-decoration:none;
+    font-size:18px;
+}
+
+.footer-links a:hover{
+    text-decoration:underline;
+}
+
+.footer-phone{
+    color:white;
+    text-decoration:none;
+}
+
+.footer-phone:hover{
+    text-decoration:underline;
+}
+
+.footer-links i{
+    margin-right:10px;
+}

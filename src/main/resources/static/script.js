@@ -132,26 +132,6 @@ document.addEventListener("DOMContentLoaded", () => {
             Icharge >= ranges.Icharge.min && Icharge <= ranges.Icharge.max
         );
 
-        // QR Codes
-        // Footer Xantrex Web page
-        const recommendedCharger = document.getElementById("Xantrex-page");
-
-        if (typeof qrCodeFeature !== "undefined") {
-            try {
-                const FooterqrImage = await qrCodeFeature.createQrImage("https://xantrex.com/", {
-                    size: 130,
-                    alt: "Xantrex",
-                    title: "Scan to jump to Xantrex main page"
-                });
-                FooterqrImage.style.margin = "0px auto 17px";
-                recommendedCharger.appendChild(document.createElement("br"));
-                recommendedCharger.appendChild(FooterqrImage);
-            }
-            catch (error) {
-                console.error("Unable to load QR code.", error);
-            }
-        }
-
         if (suggestion30A){
             const recommendedCharger = document.getElementById("recommended-charger");
             const url1 = document.createElement("a");
