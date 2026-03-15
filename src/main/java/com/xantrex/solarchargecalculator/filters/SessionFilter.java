@@ -13,21 +13,23 @@ public class SessionFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpServletRequest Serverrequest = (HttpServletRequest) request;
-        HttpServletResponse Serverresponse = (HttpServletResponse) response;
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse res = (HttpServletResponse) response;
 
-        HttpSession session = Serverrequest.getSession(false);
-        String uri = Serverrequest.getRequestURI();
+        // Cache prevention headers for static pages like index.html
+        res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        res.setHeader("Pragma", "no-cache");
+        res.setDateHeader("Expires", 0);
 
-        // Redirecting to /home if user is logged in and trying to access index.html static page
-        if (uri.equals("/index.html") && session != null && session.getAttribute("username") != null) {
-            Serverresponse.sendRedirect("/home");
-            return;
-        }
+        HttpSession session = req.getSession(false);
+        String uri = req.getRequestURI();
+        String context = req.getContextPath();
 
-        // Redirecting to /home if user is logged in and trying to access / 
-        if (uri.equals("/") && session != null && session.getAttribute("username") != null) {
-            Serverresponse.sendRedirect("/home");
+        boolean loggedIn = session != null && session.getAttribute("username") != null;
+
+        // Not allowing logged-in users to access index.html
+        if (loggedIn && (uri.equals(context + "/") || uri.endsWith("/index.html"))) {
+            res.sendRedirect(context + "/home");
             return;
         }
 
