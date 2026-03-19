@@ -30,8 +30,12 @@ public class SessionFilter implements Filter {
         boolean loggedIn = session != null && session.getAttribute("username") != null;
 
         boolean isAuthPage =
-            uri.contains("/login") ||
-            uri.contains("/signup") ||
+            uri.endsWith(context + "/signup") ||
+            uri.endsWith(context + "/login") ||
+            uri.startsWith(context + "/signup") ||
+            uri.startsWith(context + "/login") ||
+            uri.equals(context + "/signup") ||
+            uri.equals(context + "/login") ||
             uri.equals(context + "/") ||
             uri.endsWith("/index.html");
 
