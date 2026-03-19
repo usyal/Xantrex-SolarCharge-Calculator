@@ -60,6 +60,32 @@ class SessionFilterTest {
     }
 
     @Test
+    void testLoggedInUserRedirectedFromLogin() throws IOException, ServletException {
+        when(request.getSession(false)).thenReturn(session);
+        when(session.getAttribute("username")).thenReturn("Sloth");
+        when(request.getRequestURI()).thenReturn("/app/login");
+        when(request.getContextPath()).thenReturn("/app");
+
+        filter.doFilter(request, response, chain);
+
+        verify(response).sendRedirect("/app/home");
+        verify(chain, never()).doFilter(request, response);
+    }
+
+    @Test
+    void testLoggedInUserRedirectedFromSignup() throws IOException, ServletException {
+        when(request.getSession(false)).thenReturn(session);
+        when(session.getAttribute("username")).thenReturn("Sloth");
+        when(request.getRequestURI()).thenReturn("/app/signup");
+        when(request.getContextPath()).thenReturn("/app");
+
+        filter.doFilter(request, response, chain);
+
+        verify(response).sendRedirect("/app/home");
+        verify(chain, never()).doFilter(request, response);
+    }
+
+    @Test
     void testLoggedOutUserAccessIndex() throws IOException, ServletException {
         when(request.getSession(false)).thenReturn(null);
         when(request.getRequestURI()).thenReturn("/app/index.html");
