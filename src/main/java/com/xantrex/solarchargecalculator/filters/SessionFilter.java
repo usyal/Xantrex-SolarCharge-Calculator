@@ -30,10 +30,10 @@ public class SessionFilter implements Filter {
         boolean loggedIn = session != null && session.getAttribute("username") != null;
 
         boolean isAuthPage =
-                uri.startsWith(context + "/login") ||
-                uri.startsWith(context + "/signup") ||
-                uri.equals(context + "/") ||
-                uri.endsWith("/index.html");
+            uri.contains("/login") ||
+            uri.contains("/signup") ||
+            uri.equals(context + "/") ||
+            uri.endsWith("/index.html");
 
         if (loggedIn && isAuthPage) {
             res.sendRedirect(context + "/home");
