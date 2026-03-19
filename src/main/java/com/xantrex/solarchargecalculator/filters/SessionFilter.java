@@ -12,11 +12,13 @@ import java.io.IOException;
 public class SessionFilter implements Filter {
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
+
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
-        // Cache prevention headers for static pages like index.html
+        // Prevent caching so back button doesn't show old login page
         res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         res.setHeader("Pragma", "no-cache");
         res.setDateHeader("Expires", 0);
@@ -27,8 +29,13 @@ public class SessionFilter implements Filter {
 
         boolean loggedIn = session != null && session.getAttribute("username") != null;
 
-        // Not allowing logged-in users to access index.html
-        if (loggedIn && (uri.equals(context + "/") || uri.endsWith("/index.html"))) {
+        boolean isAuthPage =
+                uri.startsWith(context + "/login") ||
+                uri.startsWith(context + "/signup") ||
+                uri.equals(context + "/") ||
+                uri.endsWith("/index.html");
+
+        if (loggedIn && isAuthPage) {
             res.sendRedirect(context + "/home");
             return;
         }
