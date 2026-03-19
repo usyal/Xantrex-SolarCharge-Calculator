@@ -46,5 +46,13 @@
       </div>
     </div>
   </div>
+  <!-- Allows page to reload so looged out user cannot go back using browser and access cached page-->
+   <script>
+    window.onpageshow = function(event) {
+        if (event.persisted) {
+            window.location.reload();
+        }
+    };
+    </script>
 </body>
 </html>
