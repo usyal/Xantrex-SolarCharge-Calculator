@@ -21,6 +21,29 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initial function call to compute output for default values
     compute();
 
+    const panelSpecs = {
+        "115W": { Pmax: 115, Voc: 27.4, Vmp: 22.1, Isc: 5.6, Imp: 5.2},
+        "115Wslim": { Pmax: 115, Voc: 27.4, Vmp: 22.1, Isc: 5.6, Imp: 5.2},
+        "220W": { Pmax: 220, Voc: 25.8, Vmp: 20.9, Isc: 11.2, Imp: 10.4},
+        "330W": { Pmax: 330, Voc: 43.8, Vmp: 36.9, Isc: 9.7, Imp: 9.0},
+        "110W": { Pmax: 110, Voc: 23.3, Vmp: 18.9, Isc: 5.95, Imp: 5.83}
+    };
+
+    const panelSelect = document.getElementById("solar-panel-type");
+
+    panelSelect.addEventListener("change", () => {
+        const selectedValue = panelSelect.value;
+
+        if (panelSpecs[selectedValue]) {
+            document.getElementById("max-power").value = panelSpecs[selectedValue].Pmax;
+            document.getElementById("open-circuit-voltage").value = panelSpecs[selectedValue].Voc;
+            document.getElementById("max-power-voltage").value = panelSpecs[selectedValue].Vmp;
+            document.getElementById("short-circuit-current").value = panelSpecs[selectedValue].Isc;
+            document.getElementById("max-power-current").value = panelSpecs[selectedValue].Imp;
+        } 
+        compute();
+    });
+
     async function compute() {
         // All input fields required to compute outputs
         let Pmax = parseFloat(document.getElementById("max-power").value);
