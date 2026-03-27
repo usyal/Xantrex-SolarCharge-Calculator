@@ -267,7 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
         url1.textContent = text;
         url1.target = "_blank";
         url1.style.textDecoration = "none";
-        recommendedCharger.innerHTML = "A suitable charger is available at Xantrex! Follow the url or scan the QR code below:<br>";
+        recommendedCharger.innerHTML = "A suitable charge controller is available at Xantrex! Follow the url or scan the QR code below:<br>";
         recommendedCharger.appendChild(url1);
 
         if (typeof qrCodeFeature !== "undefined") {
