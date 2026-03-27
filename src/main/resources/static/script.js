@@ -255,7 +255,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
         else{
-            document.getElementById("recommended-charger").innerHTML = "<span style='color:red;'>&#x2757; No suitable charger is available yet</span>";
+            document.getElementById("recommended-charger").innerHTML = "<span style='color:red;'>&#x2757; No suitable charge controller is available yet</span>";
             return;
         }
     }
