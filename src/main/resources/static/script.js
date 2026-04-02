@@ -29,12 +29,31 @@ document.addEventListener("DOMContentLoaded", () => {
         "110W": { Pmax: 110, Voc: 23.3, Vmp: 18.9, Isc: 5.95, Imp: 5.83}
     };
 
+    const panelInputs = [
+        "max-power",
+        "open-circuit-voltage",
+        "max-power-voltage",
+        "short-circuit-current",
+        "max-power-current"
+    ];
+
     const panelSelect = document.getElementById("solar-panel-type");
+
+    function toggleInputs(lock) {
+        panelInputs.forEach(id => {
+            document.getElementById(id).disabled = lock;
+        });
+    }
 
     panelSelect.addEventListener("change", () => {
         const selectedValue = panelSelect.value;
 
-        if (panelSpecs[selectedValue]) {
+        if (selectedValue === "no-panel"){
+            toggleInputs(false);
+        }
+        else if (panelSpecs[selectedValue]) {
+            toggleInputs(true);
+
             document.getElementById("max-power").value = panelSpecs[selectedValue].Pmax;
             document.getElementById("open-circuit-voltage").value = panelSpecs[selectedValue].Voc;
             document.getElementById("max-power-voltage").value = panelSpecs[selectedValue].Vmp;
