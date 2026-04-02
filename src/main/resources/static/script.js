@@ -182,22 +182,22 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         };
 
-        const suggestionPWM30ARange = {
-            "12": {
-                Ptotal: { min: 50, max: 400 },
-                VocArray: { min: 18, max: 50 },
-                VmpArray: { min: 17, max: 36 },
-                ImpArray: { min: 1, max: 30 },
-                Icharge: { min: 1, max: 30 }
-            },
-            "24": {
-                Ptotal: { min: 100, max: 800 },
-                VocArray: { min: 36, max: 50 },
-                VmpArray: { min: 30, max: 72 },
-                ImpArray: { min: 1, max: 30 },
-                Icharge: { min: 1, max: 30 }
-            }
-        };
+        // const suggestionPWM30ARange = {
+        //     "12": {
+        //         Ptotal: { min: 50, max: 400 },
+        //         VocArray: { min: 18, max: 50 },
+        //         VmpArray: { min: 17, max: 36 },
+        //         ImpArray: { min: 1, max: 30 },
+        //         Icharge: { min: 1, max: 30 }
+        //     },
+        //     "24": {
+        //         Ptotal: { min: 100, max: 800 },
+        //         VocArray: { min: 36, max: 50 },
+        //         VmpArray: { min: 30, max: 72 },
+        //         ImpArray: { min: 1, max: 30 },
+        //         Icharge: { min: 1, max: 30 }
+        //     }
+        // };
 
         // Checking what possible charge controllers can be suggested
         const ranges30 = suggestion30ARange[systemVoltage.toString()];
@@ -216,52 +216,52 @@ document.addEventListener("DOMContentLoaded", () => {
             ImpArray >= ranges60.ImpArray.min && ImpArray <= ranges60.ImpArray.max &&
             Icharge >= ranges60.Icharge.min && Icharge <= ranges60.Icharge.max
         );
-        const rangesPWM30 = suggestionPWM30ARange[systemVoltage.toString()];
-        const suggestionPWM30A = rangesPWM30 && (
-            Ptotal >= rangesPWM30.Ptotal.min && Ptotal <= rangesPWM30.Ptotal.max &&
-            VocArray >= rangesPWM30.VocArray.min && VocArray <= rangesPWM30.VocArray.max &&
-            VmpArray >= rangesPWM30.VmpArray.min && VmpArray <= rangesPWM30.VmpArray.max &&
-            ImpArray >= rangesPWM30.ImpArray.min && ImpArray <= rangesPWM30.ImpArray.max &&
-            Icharge >= rangesPWM30.Icharge.min && Icharge <= rangesPWM30.Icharge.max
-        );
-        const isPWMCompatible = VmpArray <= systemVoltage * 1.5;
-        const suggestionC12 = isPWMCompatible && VocArray <= 25 && ImpArray <= 12 && Icharge <= 12;
-        const suggestionC35 = isPWMCompatible && VocArray <= 55 && ImpArray <= 35 && Icharge <= 35;
-        const suggestionC40 = isPWMCompatible && VocArray <= 125 && ImpArray <= 40 && Icharge <= 40;
-        const suggestionC60 = isPWMCompatible && VocArray <= 55 && ImpArray <= 60 && Icharge <= 60;
+        // const rangesPWM30 = suggestionPWM30ARange[systemVoltage.toString()];
+        // const suggestionPWM30A = rangesPWM30 && (
+        //     Ptotal >= rangesPWM30.Ptotal.min && Ptotal <= rangesPWM30.Ptotal.max &&
+        //     VocArray >= rangesPWM30.VocArray.min && VocArray <= rangesPWM30.VocArray.max &&
+        //     VmpArray >= rangesPWM30.VmpArray.min && VmpArray <= rangesPWM30.VmpArray.max &&
+        //     ImpArray >= rangesPWM30.ImpArray.min && ImpArray <= rangesPWM30.ImpArray.max &&
+        //     Icharge >= rangesPWM30.Icharge.min && Icharge <= rangesPWM30.Icharge.max
+        // );
+        // const isPWMCompatible = VmpArray <= systemVoltage * 1.5;
+        // const suggestionC12 = isPWMCompatible && VocArray <= 25 && ImpArray <= 12 && Icharge <= 12;
+        // const suggestionC35 = isPWMCompatible && VocArray <= 55 && ImpArray <= 35 && Icharge <= 35;
+        // const suggestionC40 = isPWMCompatible && VocArray <= 125 && ImpArray <= 40 && Icharge <= 40;
+        // const suggestionC60 = isPWMCompatible && VocArray <= 55 && ImpArray <= 60 && Icharge <= 60;
 
         // Suggesting best fit first
-        if (suggestionC12){
-            const url = "https://xantrex.com/products/solar-panels/c12-pwm-solar-charge-controller/";
-            const text = "C12 PWM Charge Controller";
-            displayChargeController(url, text);
-            return;
-        }
-        else if (suggestionC35){
-            const url = "https://xantrex.com/products/solar-panels/c-series-pwm-charge-controller/";
-            const text = "Xantrex C35 Charge Controller";
-            displayChargeController(url, text);
-            return;
-        }
-        else if (suggestionC40){
-            const url = "https://xantrex.com/products/solar-panels/c-series-pwm-charge-controller/";
-            const text = "Xantrex C40 Charge Controller";
-            displayChargeController(url, text);
-            return;
-        }
-        else if (suggestionC60){
-            const url = "https://xantrex.com/products/solar-panels/c-series-pwm-charge-controller/";
-            const text = "Xantrex C60 Charge Controller";
-            displayChargeController(url, text);
-            return;
-        }
-         else if (suggestionPWM30A){
-            const url = "https://xantrex.com/products/solar-panels/xantrex-pwm-charge-controller/";
-            const text = "Xantrex PWM Charge Controller";
-            displayChargeController(url, text);
-            return;
-        }
-        else if (suggestion30A){
+        // if (suggestionC12){
+        //     const url = "https://xantrex.com/products/solar-panels/c12-pwm-solar-charge-controller/";
+        //     const text = "C12 PWM Charge Controller";
+        //     displayChargeController(url, text);
+        //     return;
+        // }
+        // else if (suggestionC35){
+        //     const url = "https://xantrex.com/products/solar-panels/c-series-pwm-charge-controller/";
+        //     const text = "Xantrex C35 Charge Controller";
+        //     displayChargeController(url, text);
+        //     return;
+        // }
+        // else if (suggestionC40){
+        //     const url = "https://xantrex.com/products/solar-panels/c-series-pwm-charge-controller/";
+        //     const text = "Xantrex C40 Charge Controller";
+        //     displayChargeController(url, text);
+        //     return;
+        // }
+        // else if (suggestionC60){
+        //     const url = "https://xantrex.com/products/solar-panels/c-series-pwm-charge-controller/";
+        //     const text = "Xantrex C60 Charge Controller";
+        //     displayChargeController(url, text);
+        //     return;
+        // }
+        //  else if (suggestionPWM30A){
+        //     const url = "https://xantrex.com/products/solar-panels/xantrex-pwm-charge-controller/";
+        //     const text = "Xantrex PWM Charge Controller";
+        //     displayChargeController(url, text);
+        //     return;
+        // }
+        if (suggestion30A){
             const url = "https://xantrex.com/products/solar-panels/xantrex-mppt-charge-controller-30a/";
             const text = "Xantrex MPPT Charge Controller 30A";
             displayChargeController(url, text);
